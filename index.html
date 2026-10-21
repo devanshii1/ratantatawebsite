@@ -15,6 +15,17 @@
       --muted: #5d686c;
       --line: #d9dfdf;
       --white: #fffefa;
+      
+      .portrait-inner {
+         position: relative;
+         width: 100%;
+      }
+      .portrait-photo {
+        display: block;
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -122,11 +133,13 @@
           <a class="hero-link" href="#journey">Explore his journey ↓</a>
         </div>
         <div class="portrait" role="img" aria-label="Portrait placeholder for Ratan Tata">
-          <div class="portrait-inner">
-            <div class="initials">RT</div>
-            <strong>Ratan Naval Tata</strong>
-            <small>Portrait placeholder. Replace with a properly credited image before submitting.</small>
-          </div>
+            <div class="portrait-inner">
+              <img
+                src="./ratan-tata-3.webp"
+                alt="Portrait of Ratan Tata"
+                class="portrait-photo"
+              />
+            </div>
         </div>
       </section>
 
