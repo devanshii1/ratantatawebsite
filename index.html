@@ -1,287 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A student profile of Ratan Tata, his career, companies, impact, and lessons.">
-  <title>Ratan Tata — A Life in Business</title>
-  <style>
-    :root {
-      --paper: #f7f6f1;
-      --ink: #202a31;
-      --blue: #456779;
-      --blue-dark: #2f4e5d;
-      --blue-pale: #e5edf0;
-      --muted: #5d686c;
-      --line: #d9dfdf;
-      --white: #fffefa;
-      
-      .portrait-inner {
-         position: relative;
-         width: 100%;
-      }
-      .portrait-photo {
-        display: block;
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-      }
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font: 16px/1.7 Arial, Helvetica, sans-serif;
-    }
-    a { color: var(--blue-dark); text-underline-offset: 3px; }
-    a:hover { color: var(--blue); }
-    .page { width: min(1060px, 91%); margin: 0 auto; }
-    .topline {
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 20px; padding: 21px 0; border-bottom: 1px solid var(--line);
-      font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
-    }
-    .wordmark { font-weight: 700; }
-    nav { display: flex; flex-wrap: wrap; gap: 19px; letter-spacing: 0; text-transform: none; }
-    nav a { color: var(--muted); text-decoration: none; }
-    nav a:hover { text-decoration: underline; }
-    .hero {
-      display: grid; grid-template-columns: 1.15fr .85fr; gap: 52px;
-      align-items: center; padding: 66px 0 60px;
-    }
-    .eyebrow { color: var(--blue); font-size: .76rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
-    h1, h2, .quote {
-      font-family: Georgia, "Times New Roman", serif; font-weight: 400;
-    }
-    h1 { font-size: clamp(3.2rem, 7vw, 5.8rem); letter-spacing: -.055em; line-height: .98; margin: 17px 0 22px; }
-    .hero-copy { max-width: 570px; color: #465257; font-size: 1.06rem; }
-    .hero-link { display: inline-block; margin-top: 13px; font-weight: 700; }
-    .portrait {
-      min-height: 365px; background: var(--blue-pale); border: 1px solid #cbd8dd;
-      display: flex; align-items: center; justify-content: center; text-align: center;
-      padding: 28px; position: relative;
-    }
-    .portrait::before { content: ""; position: absolute; inset: 16px; border: 1px solid #bdcdd3; }
-    .portrait-inner { position: relative; }
-    .initials { font: 5.3rem/.98 Georgia, serif; color: var(--blue); }
-    .portrait strong { display: block; margin-top: 14px; }
-    .portrait small { display: block; max-width: 230px; margin: 7px auto 0; color: var(--muted); line-height: 1.5; }
-    section { border-top: 1px solid var(--line); padding: 48px 0; }
-    .section-top { display: grid; grid-template-columns: .8fr 1.2fr; gap: 28px; margin-bottom: 27px; align-items: start; }
-    h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.08; letter-spacing: -.035em; margin: 8px 0 0; }
-    .section-intro { color: var(--muted); max-width: 560px; margin: 5px 0 0; }
-    .timeline { display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; }
-    .milestone { display: grid; grid-template-columns: 66px 1fr; gap: 15px; padding: 19px 0; border-top: 1px solid var(--line); }
-    .year { color: var(--blue); font-weight: 700; font-size: .93rem; padding-top: 2px; }
-    .milestone h3, .venture h3, .impact h3 { font-size: 1.05rem; margin: 0 0 5px; }
-    .milestone p, .venture p, .impact p { margin: 0; color: var(--muted); font-size: .94rem; }
-    .venture-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .venture { border: 1px solid var(--line); background: var(--white); padding: 21px; }
-    .venture .tag { color: var(--blue); text-transform: uppercase; letter-spacing: .1em; font-size: .7rem; font-weight: 700; }
-    .venture h3 { margin: 8px 0; font-size: 1.18rem; }
-    .venture button {
-      margin-top: 15px; border: 0; background: none; padding: 0; color: var(--blue-dark);
-      font: inherit; font-weight: 700; cursor: pointer; text-decoration: underline; text-underline-offset: 4px;
-    }
-    .venture button:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
-    .details { margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); color: var(--muted); font-size: .92rem; }
-    .details[hidden] { display: none; }
-    .details p + p { margin-top: 10px; }
-    .impact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    .impact { background: var(--blue-pale); padding: 23px; }
-    .impact h3 { margin-bottom: 8px; }
-    .takeaways { margin-top: 25px; }
-    .takeaways h3 { font-size: 1rem; margin: 0 0 10px; }
-    .takeaways ol { margin: 0; padding-left: 23px; }
-    .takeaways li { padding: 5px 0; }
-    .sources { padding-left: 20px; color: var(--muted); }
-    .sources li { margin: 8px 0; overflow-wrap: anywhere; }
-    .image-note { color: var(--muted); font-size: .9rem; }
-    footer { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--line); padding: 23px 0 30px; color: var(--muted); font-size: .84rem; }
-    @media (max-width: 760px) {
-      .topline { align-items: flex-start; flex-direction: column; gap: 12px; }
-      nav { gap: 14px; }
-      .hero { grid-template-columns: 1fr; gap: 28px; padding: 43px 0; }
-      .portrait { min-height: 275px; }
-      .section-top { grid-template-columns: 1fr; gap: 12px; }
-      .timeline, .impact-grid { grid-template-columns: 1fr; }
-      .venture-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 480px) { .venture-grid { grid-template-columns: 1fr; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An interactive student profile of Ratan Tata: career milestones, ventures, impact and lessons.">
+<title>Ratan Tata — A Life in Business</title>
+<style>
+:root{--paper:#f7f6f1;--ink:#202a31;--blue:#456779;--blue-dark:#2f4e5d;--blue-pale:#e5edf0;--muted:#526168;--line:#d9dfdf;--white:#fffefa}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:22px}
+.view,.hero{scroll-margin-top:18px}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.75 Arial,Helvetica,sans-serif}
+a{color:var(--blue-dark);text-underline-offset:4px}
+a:hover{color:var(--blue)}
+.page{width:min(1120px,92%);margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:center;gap:22px;padding:20px 0;border-bottom:1px solid var(--line)}
+.wordmark{font-size:.86rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+nav{display:flex;gap:8px;flex-wrap:wrap}
+nav button{font:inherit;font-size:.95rem;font-weight:700;border:1px solid transparent;border-radius:999px;padding:10px 16px;background:transparent;color:var(--muted);cursor:pointer}
+nav button{border-color:transparent;transition:background .18s ease,color .18s ease,border-color .18s ease}
+nav button:hover{background:#edf3f5;color:var(--blue-dark)}
+nav button[aria-selected=true]{background:#dceaf0;color:#234b60;border-color:#c5dce5}
+nav button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:58px 0 52px}
+.eyebrow{color:var(--blue);font-size:.8rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:400}
+h1{font-size:clamp(3.7rem,8vw,6.5rem);letter-spacing:-.055em;line-height:.98;margin:15px 0 24px}
+.hero-copy{max-width:620px;color:#465257;font-size:1.15rem}
+.portrait{min-height:340px;background:var(--blue-pale);border:1px solid #cbd8dd;display:flex;align-items:center;justify-content:center;padding:18px;position:relative}
+.portrait:before{content:"";position:absolute;inset:12px;border:1px solid #bdcdd3;pointer-events:none}
+.portrait-inner{position:relative;width:100%;height:320px}
+.portrait-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hero-credit{font-size:.8rem;color:var(--muted);margin-top:8px}
+.view{border-top:1px solid var(--line);padding:42px 0 58px}
+.view[hidden]{display:none}
+.section-top{display:grid;grid-template-columns:.8fr 1.2fr;gap:30px;margin-bottom:28px;align-items:start}
+h2{font-size:clamp(2.4rem,5vw,3.5rem);line-height:1.08;letter-spacing:-.035em;margin:8px 0 0}
+.section-intro{color:var(--muted);font-size:1.08rem;margin:5px 0 0}
+.timeline{display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
+.milestone{display:grid;grid-template-columns:76px 1fr;gap:16px;padding:21px 0;border-top:1px solid var(--line)}
+.year{color:var(--blue);font-weight:800;font-size:1.08rem;padding-top:2px}
+h3{font-size:1.2rem;line-height:1.35;margin:0 0 7px}
+.milestone p,.venture p,.impact p{margin:0;color:var(--muted);font-size:1.03rem}
+.deck{background:var(--white);border:1px solid var(--line);padding:clamp(22px,5vw,48px);min-height:310px;display:flex;flex-direction:column;justify-content:space-between}
+.deck-top{display:flex;justify-content:space-between;gap:15px;align-items:center}
+.deck-year{font-size:clamp(3rem,8vw,5rem);line-height:1;color:var(--blue);font-family:Georgia,serif}
+.deck-count{font-size:.9rem;color:var(--muted);font-weight:700}
+.deck h3{font:400 clamp(1.8rem,4vw,2.6rem)/1.2 Georgia,serif;margin:24px 0 12px}
+.deck p{font-size:1.1rem;color:var(--muted);max-width:760px}
+.deck-controls{display:flex;justify-content:space-between;gap:12px;margin-top:25px}
+.deck-controls button,.venture button{border:1px solid var(--blue-dark);border-radius:7px;background:var(--blue-dark);color:white;padding:11px 17px;font:inherit;font-weight:700;cursor:pointer}
+.deck-controls button:disabled{opacity:.35;cursor:not-allowed}
+.deck-controls button:hover:not(:disabled),.venture button:hover{background:var(--blue);color:white}
+.venture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.venture{border:1px solid var(--line);background:var(--white);padding:24px}
+.tag{color:var(--blue);text-transform:uppercase;letter-spacing:.1em;font-size:.78rem;font-weight:800}
+.venture h3{margin:10px 0;font-size:1.35rem}
+.venture button{margin-top:17px}
+.details{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:1rem}
+.details[hidden]{display:none}
+.details p+p{margin-top:12px}
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.impact{background:var(--blue-pale);padding:26px}
+.takeaways{margin-top:28px}
+.takeaways h3{margin-bottom:12px}
+.takeaways li{padding:7px 0;font-size:1.06rem}
+.sources{padding-left:23px;color:var(--muted)}
+.sources li{margin:12px 0;overflow-wrap:anywhere}
+@media(max-width:760px){header{align-items:flex-start;flex-direction:column}.hero{grid-template-columns:1fr;gap:25px;padding:38px 0}.portrait{min-height:280px}.portrait-inner{height:270px}.section-top{grid-template-columns:1fr;gap:12px}.timeline,.impact-grid{grid-template-columns:1fr}.venture-grid{grid-template-columns:1fr 1fr}nav{gap:5px}nav button{padding:8px 12px}}
+@media(max-width:480px){.venture-grid{grid-template-columns:1fr}body{font-size:17px}.milestone{grid-template-columns:66px 1fr}}
+</style>
 </head>
 <body>
-  <div class="page">
-    <header class="topline">
-      <div class="wordmark">A profile in leadership</div>
-      <nav aria-label="Main navigation">
-        <a href="#journey">Journey</a>
-        <a href="#ventures">Ventures</a>
-        <a href="#impact">Impact</a>
-        <a href="#sources">Sources</a>
-      </nav>
-    </header>
-
-    <main>
-      <section class="hero" style="border-top:0">
-        <div>
-          <div class="eyebrow">Entrepreneur · Industrialist · Philanthropist</div>
-          <h1>Ratan<br>Tata</h1>
-          <p class="hero-copy">Ratan Tata was an Indian industrialist who led the Tata Group as chairman from 1991 to 2012. During his leadership, the group expanded internationally, while his public work also included a strong association with philanthropy and social development.</p>
-          <a class="hero-link" href="#journey">Explore his journey ↓</a>
-        </div>
-        <div class="portrait" role="img" aria-label="Portrait placeholder for Ratan Tata">
-            <div class="portrait-inner">
-              <img
-                src="./ratan-tata-3.webp"
-                alt="Portrait of Ratan Tata"
-                class="portrait-photo"
-              />
-            </div>
-        </div>
-      </section>
-
-      <section id="journey">
-        <div class="section-top">
-          <div><div class="eyebrow">01 / Career</div><h2>Milestones along the way</h2></div>
-          <p class="section-intro">A short timeline of important moments in his career, from joining the Tata Group to helping it become a more international business.</p>
-        </div>
-        <div class="timeline" id="timeline"></div>
-      </section>
-
-      <section id="ventures">
-        <div class="section-top">
-          <div><div class="eyebrow">02 / Companies & ventures</div><h2>Business and ideas</h2></div>
-          <p class="section-intro">Select a card to learn more about Ratan Tata’s connection to each company or venture. Official websites are included for further reading.</p>
-        </div>
-        <div class="venture-grid" id="venture-list"></div>
-      </section>
-
-      <section id="impact">
-        <div class="section-top">
-          <div><div class="eyebrow">03 / Impact</div><h2>Beyond business</h2></div>
-          <p class="section-intro">His legacy is connected both to the Tata Group’s growth and to philanthropic work supporting communities.</p>
-        </div>
-        <div class="impact-grid">
-          <article class="impact"><h3>International growth</h3><p>During his chairmanship, Tata companies made major international acquisitions, including Tetley and Jaguar Land Rover. These moves expanded the group’s global presence.</p></article>
-          <article class="impact"><h3>Philanthropy</h3><p>Tata-linked philanthropic trusts have supported initiatives in areas such as health, education, livelihoods, and community development.</p></article>
-        </div>
-        <div class="takeaways">
-          <h3>Two lessons readers can take away</h3>
-          <ol>
-            <li>Think long term: meaningful progress often requires patience and sustained effort.</li>
-            <li>Pair ambition with responsibility: consider how decisions affect people beyond the business itself.</li>
-          </ol>
-        </div>
-      </section>
-
-      <section id="sources">
-        <div class="section-top">
-          <div><div class="eyebrow">04 / Research</div><h2>Sources & image credit</h2></div>
-          <p class="section-intro">These official sources are a starting point for checking career details and company information. The portrait above is only a placeholder.</p>
-        </div>
-        <ul class="sources">
-          <li><a href="https://www.tata.com/about-us/tata-group-our-heritage/tata-titans/ratan-naval-tata" target="_blank" rel="noopener">Tata Group — Ratan Naval Tata biography</a></li>
-          <li><a href="https://www.tata.com/about-us/tata-group-our-heritage/Our-Timeline" target="_blank" rel="noopener">Tata Group — Our Timeline</a></li>
-          <li><a href="https://www.tatamotors.com/" target="_blank" rel="noopener">Tata Motors — official website</a></li>
-          <li><a href="https://www.jaguarlandrover.com/" target="_blank" rel="noopener">Jaguar Land Rover — official website</a></li>
-          <li><a href="https://www.tatatrusts.org/" target="_blank" rel="noopener">Tata Trusts — official website</a></li>
-          <li class="image-note"><strong>Image credit:</strong> Add the original image URL and photographer or publisher after choosing a photograph you are allowed to use.</li>
-        </ul>
-      </section>
-    </main>
-
-    <footer>
-      <span>Student website project</span>
-      <span>HTML · CSS · JavaScript</span>
-    </footer>
+<div class="page">
+<header>
+  <div class="wordmark">Ratan Tata · Leadership &amp; legacy</div>
+  <nav role="tablist" aria-label="Website sections">
+    <button type="button" role="tab" id="tab-intro" aria-controls="intro" aria-selected="true" data-view="intro">Overview</button>
+    <button type="button" role="tab" id="tab-journey" aria-controls="journey" aria-selected="false" data-view="journey">Timeline</button>
+    <button type="button" role="tab" id="tab-ventures" aria-controls="ventures" aria-selected="false" data-view="ventures">Companies</button>
+    <button type="button" role="tab" id="tab-impact" aria-controls="impact" aria-selected="false" data-view="impact">Legacy</button>
+    <button type="button" role="tab" id="tab-sources" aria-controls="sources" aria-selected="false" data-view="sources">References</button>
+  </nav>
+</header>
+<main>
+<section class="hero" id="intro" role="tabpanel" aria-labelledby="tab-intro" data-panel="intro">
+  <div>
+    <div class="eyebrow">Entrepreneur · Industrialist · Philanthropist</div>
+    <h1>Ratan<br>Tata</h1>
+    <p class="hero-copy">Ratan Tata was an Indian industrialist who led the Tata Group as chairman from 1991 to 2012. During his leadership, the group expanded internationally, while his public work also included a strong association with philanthropy and social development.</p>
+    <p><a href="#journey" data-open-view="journey">Explore his journey →</a></p>
   </div>
-
-  <script>
-    // Timeline content is stored as data. The page creates one timeline item per object.
-    const milestones = [
-      { year: "1962", title: "Begins his Tata career", text: "Ratan Tata joins the Tata Group and starts learning the business from within." },
-      { year: "1971", title: "Takes on Nelco", text: "He becomes director-in-charge of Nelco, an electronics company facing difficulties." },
-      { year: "1991", title: "Becomes chairman", text: "He succeeds J. R. D. Tata as chairman of Tata Sons." },
-      { year: "2000", title: "Tetley acquisition", text: "The group acquires Tetley, an important step in its international expansion." },
-      { year: "2008", title: "Nano and Jaguar Land Rover", text: "Tata Motors launches the Nano and acquires Jaguar Land Rover in the same year." },
-      { year: "2012", title: "Steps down as chairman", text: "He steps down as chairman of Tata Sons and is named chairman emeritus." },
-      { year: "2024", title: "A lasting legacy", text: "Ratan Tata dies in October 2024, aged 86; his work remains part of the Tata Group’s history." }
-    ];
-
-    const ventures = [
-      {
-        name: "Tata Group", tag: "Leadership",
-        summary: "A group of businesses across many industries.",
-        details: "Ratan Tata became chairman of Tata Sons in 1991. During his chairmanship, the group went through restructuring and expanded internationally.",
-        url: "https://www.tata.com/"
-      },
-      {
-        name: "Tata Motors", tag: "Automotive",
-        summary: "The company behind the Indica and Nano projects.",
-        details: "Ratan Tata supported the development of the Nano, a small car launched in 2008 with the aim of making car ownership more accessible.",
-        url: "https://www.tatamotors.com/"
-      },
-      {
-        name: "Jaguar Land Rover", tag: "Global acquisition",
-        summary: "A major international acquisition in 2008.",
-        details: "Tata Motors acquired Jaguar Land Rover during Ratan Tata’s chairmanship, increasing the group’s presence in the global automotive industry.",
-        url: "https://www.jaguarlandrover.com/"
-      },
-      {
-        name: "Tata Consultancy Services", tag: "Technology",
-        summary: "A global IT and consulting company in the group.",
-        details: "TCS was established before Ratan Tata became chairman and grew substantially during his era as part of the wider Tata Group.",
-        url: "https://www.tcs.com/"
-      },
-      {
-        name: "Tata Trusts", tag: "Philanthropy",
-        summary: "Trusts supporting social and community initiatives.",
-        details: "Ratan Tata was closely associated with Tata Trusts, whose work includes health, education, livelihoods, and community development.",
-        url: "https://www.tatatrusts.org/"
-      },
-      {
-        name: "Tata Nano", tag: "Product project",
-        summary: "A small car designed to make personal transport more affordable.",
-        details: "Ratan Tata championed the Nano concept. The car was launched in 2008 and became one of the best-known projects linked to his leadership.",
-        url: "https://www.tatamotors.com/"
-      }
-    ];
-
-    // Generate the timeline from the array above.
-    document.getElementById("timeline").innerHTML = milestones.map(item => `
-      <article class="milestone">
-        <div class="year">${item.year}</div>
-        <div><h3>${item.title}</h3><p>${item.text}</p></div>
-      </article>
-    `).join("");
-
-    // Generate venture cards from structured data, including their official links.
-    document.getElementById("venture-list").innerHTML = ventures.map((item, index) => `
-      <article class="venture">
-        <div class="tag">${item.tag}</div>
-        <h3>${item.name}</h3>
-        <p>${item.summary}</p>
-        <button type="button" aria-expanded="false" aria-controls="venture-detail-${index}">Read more +</button>
-        <div class="details" id="venture-detail-${index}" hidden>
-          <p>${item.details}</p>
-          <p><a href="${item.url}" target="_blank" rel="noopener">Official website ↗</a></p>
-        </div>
-      </article>
-    `).join("");
-
-    // Clicking a card's button shows or hides its extra details.
-    document.querySelectorAll(".venture button").forEach(button => {
-      button.addEventListener("click", () => {
-        const details = document.getElementById(button.getAttribute("aria-controls"));
-        const isOpening = details.hidden;
-        details.hidden = !isOpening;
-        button.setAttribute("aria-expanded", String(isOpening));
-        button.textContent = isOpening ? "Read less −" : "Read more +";
-      });
-    });
-  </script>
+  <div>
+    <div class="portrait" role="group" aria-label="Portrait of Ratan Tata">
+      <div class="portrait-inner"><img src="./ratan-tata-3.webp" alt="Portrait of Ratan Tata" class="portrait-photo"></div>
+    </div>
+    <p class="hero-credit">Portrait image: <a href="./ratan-tata-3.webp" target="_blank" rel="noopener">open ratan-tata-3.webp</a>. Add the original photographer or publisher credit if known.</p>
+  </div>
+</section>
+<section class="view" id="journey" role="tabpanel" aria-labelledby="tab-journey" data-panel="journey">
+  <div class="section-top"><div><div class="eyebrow">01 / Career</div><h2>Journey, year by year</h2></div><p class="section-intro">Use the arrows to move through the milestone deck. A full timeline is also listed below.</p></div>
+  <div class="deck" aria-live="polite">
+    <div class="deck-top"><div class="deck-year" id="deck-year">1962</div><div class="deck-count" id="deck-count">CARD 1 OF 7</div></div>
+    <div><h3 id="deck-title">Begins his Tata career</h3><p id="deck-text">Ratan Tata joins the Tata Group and starts learning the business from within.</p></div>
+    <div class="deck-controls"><button id="prev-card" type="button" disabled>← Previous</button><button id="next-card" type="button">Next milestone →</button></div>
+  </div>
+  <h3 style="margin-top:28px">All milestones</h3><div class="timeline" id="timeline"></div>
+</section>
+<section class="view" id="ventures" role="tabpanel" aria-labelledby="tab-ventures" data-panel="ventures">
+  <div class="section-top"><div><div class="eyebrow">02 / Companies &amp; ventures</div><h2>Business and ideas</h2></div><p class="section-intro">Open each card for more detail and a link to the company’s official website.</p></div>
+  <div class="venture-grid" id="venture-list"></div>
+</section>
+<section class="view" id="impact" role="tabpanel" aria-labelledby="tab-impact" data-panel="impact">
+  <div class="section-top"><div><div class="eyebrow">03 / Impact</div><h2>Beyond business</h2></div><p class="section-intro">His legacy is connected both to the Tata Group’s growth and to philanthropic work supporting communities.</p></div>
+  <div class="impact-grid">
+    <article class="impact"><h3>International growth</h3><p>During his chairmanship, Tata companies made major international acquisitions, including Tetley and Jaguar Land Rover. These moves expanded the group’s global presence.</p></article>
+    <article class="impact"><h3>Philanthropy</h3><p>Tata-linked philanthropic trusts have supported initiatives in areas such as health, education, livelihoods, and community development.</p></article>
+  </div>
+  <div class="takeaways"><h3>Two lessons readers can take away</h3><ol><li>Think long term: meaningful progress often requires patience and sustained effort.</li><li>Pair ambition with responsibility: consider how decisions affect people beyond the business itself.</li></ol></div>
+</section>
+<section class="view" id="sources" role="tabpanel" aria-labelledby="tab-sources" data-panel="sources">
+  <div class="section-top"><div><div class="eyebrow">04 / Research</div><h2>Sources</h2></div></div>
+  <ul class="sources">
+    <li><a href="https://www.tata.com/about-us/tata-group-our-heritage/tata-titans/ratan-naval-tata" target="_blank" rel="noopener">Tata Group — Ratan Naval Tata biography</a></li>
+    <li><a href="https://www.tata.com/about-us/tata-group-our-heritage/Our-Timeline" target="_blank" rel="noopener">Tata Group — Our Timeline</a></li>
+    <li><a href="https://www.tatamotors.com/" target="_blank" rel="noopener">Tata Motors — official website</a></li>
+    <li><a href="https://www.jaguarlandrover.com/" target="_blank" rel="noopener">Jaguar Land Rover — official website</a></li>
+    <li><a href="https://www.tatatrusts.org/" target="_blank" rel="noopener">Tata Trusts — official website</a></li>
+    <li><a href="./ratan-tata-3.webp" target="_blank" rel="noopener">Ratan Tata portrait image</a></li>
+  </ul>
+</section>
+</main>
+</div>
+<script>
+const milestones=[
+{year:"1962",title:"Begins his Tata career",text:"Ratan Tata joins the Tata Group and starts learning the business from within."},
+{year:"1971",title:"Takes on Nelco",text:"He becomes director-in-charge of Nelco, an electronics company facing difficulties."},
+{year:"1991",title:"Becomes chairman",text:"He succeeds J. R. D. Tata as chairman of Tata Sons."},
+{year:"2000",title:"Tetley acquisition",text:"The group acquires Tetley, an important step in its international expansion."},
+{year:"2008",title:"Nano and Jaguar Land Rover",text:"Tata Motors launches the Nano and acquires Jaguar Land Rover in the same year."},
+{year:"2012",title:"Steps down as chairman",text:"He steps down as chairman of Tata Sons and is named chairman emeritus."},
+{year:"2024",title:"A lasting legacy",text:"Ratan Tata dies in October 2024, aged 86; his work remains part of the Tata Group’s history."}
+];
+const ventures=[
+{name:"Tata Group",tag:"Leadership",summary:"A group of businesses across many industries.",details:"Ratan Tata became chairman of Tata Sons in 1991. During his chairmanship, the group went through restructuring and expanded internationally.",url:"https://www.tata.com/"},
+{name:"Tata Motors",tag:"Automotive",summary:"The company behind the Indica and Nano projects.",details:"Ratan Tata supported the development of the Nano, a small car launched in 2008 with the aim of making car ownership more accessible.",url:"https://www.tatamotors.com/"},
+{name:"Jaguar Land Rover",tag:"Global acquisition",summary:"A major international acquisition in 2008.",details:"Tata Motors acquired Jaguar Land Rover during Ratan Tata’s chairmanship, increasing the group’s presence in the global automotive industry.",url:"https://www.jaguarlandrover.com/"},
+{name:"Tata Consultancy Services",tag:"Technology",summary:"A global IT and consulting company in the group.",details:"TCS was established before Ratan Tata became chairman and grew substantially during his era as part of the wider Tata Group.",url:"https://www.tcs.com/"},
+{name:"Tata Trusts",tag:"Philanthropy",summary:"Trusts supporting social and community initiatives.",details:"Ratan Tata was closely associated with Tata Trusts, whose work includes health, education, livelihoods, and community development.",url:"https://www.tatatrusts.org/"},
+{name:"Tata Nano",tag:"Product project",summary:"A small car designed to make personal transport more affordable.",details:"Ratan Tata championed the Nano concept. The car was launched in 2008 and became one of the best-known projects linked to his leadership.",url:"https://www.tatamotors.com/"}
+];
+let cardIndex=0;
+function showCard(index){cardIndex=index;const item=milestones[index];document.getElementById("deck-year").textContent=item.year;document.getElementById("deck-title").textContent=item.title;document.getElementById("deck-text").textContent=item.text;document.getElementById("deck-count").textContent="CARD "+(index+1)+" OF "+milestones.length;document.getElementById("prev-card").disabled=index===0;document.getElementById("next-card").disabled=index===milestones.length-1;}
+document.getElementById("timeline").innerHTML=milestones.map(item=>'<article class="milestone"><div class="year">'+item.year+'</div><div><h3>'+item.title+'</h3><p>'+item.text+'</p></div></article>').join("");
+document.getElementById("venture-list").innerHTML=ventures.map((item,index)=>'<article class="venture"><div class="tag">'+item.tag+'</div><h3>'+item.name+'</h3><p>'+item.summary+'</p><button type="button" aria-expanded="false" aria-controls="venture-detail-'+index+'">Read more +</button><div class="details" id="venture-detail-'+index+'" hidden><p>'+item.details+'</p><p><a href="'+item.url+'" target="_blank" rel="noopener">Official website ↗</a></p></div></article>').join("");
+document.querySelectorAll(".venture button").forEach(button=>button.addEventListener("click",()=>{const details=document.getElementById(button.getAttribute("aria-controls"));const opening=details.hidden;details.hidden=!opening;button.setAttribute("aria-expanded",String(opening));button.textContent=opening?"Read less −":"Read more +";}));
+document.getElementById("prev-card").addEventListener("click",()=>showCard(Math.max(0,cardIndex-1)));
+document.getElementById("next-card").addEventListener("click",()=>showCard(Math.min(milestones.length-1,cardIndex+1)));
+function openView(name, shouldScroll=true){
+  document.querySelectorAll("[data-view]").forEach(button=>{
+    const selected=button.dataset.view===name;
+    button.setAttribute("aria-selected",String(selected));
+    button.setAttribute("aria-current",selected?"location":"false");
+  });
+  const target=document.querySelector('[data-panel="'+name+'"]');
+  if(shouldScroll && target) target.scrollIntoView({behavior:"smooth",block:"start"});
+}
+document.querySelectorAll("[data-view]").forEach(button=>button.addEventListener("click",()=>openView(button.dataset.view)));
+document.querySelectorAll("[data-open-view]").forEach(link=>link.addEventListener("click",event=>{event.preventDefault();openView(link.dataset.openView);}));
+const observer=new IntersectionObserver(entries=>{
+  const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+  if(visible) openView(visible.target.dataset.panel,false);
+},{rootMargin:"-15% 0px -55% 0px",threshold:[0,.15,.35,.6]});
+document.querySelectorAll("[data-panel]").forEach(panel=>observer.observe(panel));
+showCard(0);
+</script>
 </body>
 </html>
