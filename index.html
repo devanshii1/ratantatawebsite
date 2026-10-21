@@ -8,8 +8,9 @@
 <style>
 :root{--paper:#f7f6f1;--ink:#202a31;--blue:#456779;--blue-dark:#2f4e5d;--blue-pale:#e5edf0;--muted:#526168;--line:#d9dfdf;--white:#fffefa}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:22px}
-.view,.hero{scroll-margin-top:18px}
+html{scroll-behavior:smooth;scroll-padding-top:112px}
+header{position:sticky;top:0;z-index:20;background:rgba(247,246,241,.97);backdrop-filter:blur(10px)}
+.view,.hero{scroll-margin-top:112px}
 body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.75 Arial,Helvetica,sans-serif}
 a{color:var(--blue-dark);text-underline-offset:4px}
 a:hover{color:var(--blue)}
@@ -67,8 +68,42 @@ h3{font-size:1.2rem;line-height:1.35;margin:0 0 7px}
 .takeaways li{padding:7px 0;font-size:1.06rem}
 .sources{padding-left:23px;color:var(--muted)}
 .sources li{margin:12px 0;overflow-wrap:anywhere}
+
+.venture-tools{display:grid;grid-template-columns:auto minmax(180px,1fr) auto minmax(160px,.7fr);gap:10px 14px;align-items:center;margin:0 0 12px;padding:16px;background:#edf3f5;border:1px solid #d5e2e7;border-radius:10px}
+.search-label{font-size:.9rem;font-weight:700;color:var(--blue-dark)}
+.venture-tools input,.venture-tools select{width:100%;min-width:0;padding:11px 12px;border:1px solid #b9cbd2;border-radius:7px;background:white;color:var(--ink);font:inherit;font-size:1rem}
+.venture-tools input:focus,.venture-tools select:focus{outline:2px solid var(--blue);outline-offset:2px}
+.filter-status{grid-column:1/-1;margin:0;color:var(--muted);font-size:.9rem}
+.venture[hidden]{display:none}
+.connection-map{margin-top:52px}
+.map-heading{margin-bottom:18px}
+.map-canvas{position:relative;min-height:370px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,#fbfcfa,#edf3f5);overflow:hidden}
+.map-lines{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:#9bb7c3;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.map-node{position:absolute;z-index:1;transform:translateX(-50%);width:clamp(120px,19%,180px);min-height:48px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 12px;border:1px solid #b7ccd5;border-radius:9px;background:#fffefa;color:var(--blue-dark);font-weight:700;box-shadow:0 3px 12px #233b4510}
+.node-ratan{left:50%;top:16px;background:#dceaf0;border-color:#b8d1dc}
+.node-group{left:50%;top:104px;background:var(--blue-dark);color:white;border-color:var(--blue-dark);width:230px}
+.node-motors{left:16.7%;top:220px}
+.node-tcs{left:41.7%;top:220px}
+.node-trusts{left:66.7%;top:220px}
+.node-jlr{left:88%;top:220px}
+.node-nano{left:16.7%;top:300px}
+.map-caption{position:absolute;bottom:8px;left:12px;right:12px;text-align:center;color:var(--muted);font-size:.8rem}
+
+.expanded-map{padding:22px;overflow:visible;background:linear-gradient(180deg,#fbfcfa,#edf3f5);text-align:center}
+.expanded-map .node-ratan,.expanded-map .node-group{position:relative;left:auto;top:auto;transform:none;margin:0 auto 12px;width:min(100%,280px)}
+.expanded-map .node-ratan{background:#dceaf0;color:#234b60}
+.expanded-map .node-group{background:var(--blue-dark);color:white;width:min(100%,340px)}
+.map-connector{font-size:.9rem;color:var(--muted);margin:0 auto 12px}
+.map-branches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:24px;text-align:left}
+.map-branch{display:flex;flex-direction:column;gap:8px;border:1px solid #cbd8dd;border-radius:10px;background:#fffefa;padding:16px}
+.map-branch strong{color:var(--blue-dark);margin-bottom:3px}
+.map-branch span{font-size:.95rem;border-top:1px solid var(--line);padding-top:6px;color:var(--ink)}
+.map-caption{margin-top:18px;color:var(--muted);font-size:.85rem;text-align:left}
+@media(max-width:760px){.map-branches{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.map-branches{grid-template-columns:1fr}.expanded-map{padding:14px}}
 @media(max-width:760px){header{align-items:flex-start;flex-direction:column}.hero{grid-template-columns:1fr;gap:25px;padding:38px 0}.portrait{min-height:280px}.portrait-inner{height:270px}.section-top{grid-template-columns:1fr;gap:12px}.timeline,.impact-grid{grid-template-columns:1fr}.venture-grid{grid-template-columns:1fr 1fr}nav{gap:5px}nav button{padding:8px 12px}}
-@media(max-width:480px){.venture-grid{grid-template-columns:1fr}body{font-size:17px}.milestone{grid-template-columns:66px 1fr}}
+@media(max-width:760px){.venture-tools{grid-template-columns:1fr}.filter-status{grid-column:auto}.map-canvas{min-height:520px}.map-lines{display:none}.map-node{left:50%;width:min(78%,280px)}.node-ratan{top:14px}.node-group{top:82px;width:min(82%,300px)}.node-motors{top:160px}.node-tcs{top:220px}.node-trusts{top:280px}.node-jlr{top:340px}.node-nano{top:400px}.map-caption{bottom:6px}}
+@media(max-width:480px){.venture-grid{grid-template-columns:1fr}body{font-size:17px}.milestone{grid-template-columns:66px 1fr}header{gap:10px}nav button{font-size:.9rem}}
 </style>
 </head>
 <body>
@@ -109,7 +144,46 @@ h3{font-size:1.2rem;line-height:1.35;margin:0 0 7px}
 </section>
 <section class="view" id="ventures" role="tabpanel" aria-labelledby="tab-ventures" data-panel="ventures">
   <div class="section-top"><div><div class="eyebrow">02 / Companies &amp; ventures</div><h2>Business and ideas</h2></div><p class="section-intro">Open each card for more detail and a link to the company’s official website.</p></div>
+  <div class="venture-tools" aria-label="Filter companies">
+    <label class="search-label" for="venture-search">Search companies</label>
+    <input id="venture-search" type="search" placeholder="Try “car”, “technology”, or “Tata Trusts”" autocomplete="off">
+    <label class="search-label" for="industry-filter">Filter by area</label>
+    <select id="industry-filter">
+      <option value="all">All areas</option>
+      <option value="Leadership">Leadership</option>
+      <option value="Steel &amp; materials">Steel &amp; materials</option>
+      <option value="Automotive">Automotive</option>
+      <option value="Retail">Retail</option>
+      <option value="Consumer &amp; lifestyle">Consumer &amp; lifestyle</option>
+      <option value="Technology">Technology</option>
+      <option value="Energy &amp; infrastructure">Energy &amp; infrastructure</option>
+      <option value="Chemicals">Chemicals</option>
+      <option value="Hospitality &amp; aviation">Hospitality &amp; aviation</option>
+      <option value="Philanthropy">Philanthropy</option>
+      <option value="Financial services">Financial services</option>
+      <option value="Aerospace &amp; engineering">Aerospace &amp; engineering</option>
+      <option value="Product project">Product project</option>
+    </select>
+    <p id="filter-status" class="filter-status" aria-live="polite">Showing all companies and ventures.</p>
+  </div>
   <div class="venture-grid" id="venture-list"></div>
+  <div class="connection-map">
+    <div class="section-top map-heading"><div><div class="eyebrow">Connection map</div><h2>How the ventures connect</h2></div><p class="section-intro">This map groups major businesses associated with the wider Tata Group. Ratan Tata led Tata Sons as chairman from 1991 to 2012; the map is simplified and is not an ownership chart.</p></div>
+    <div class="map-canvas expanded-map" role="img" aria-label="Simplified map linking Ratan Tata to Tata Sons and the Tata Group, with major businesses across industry, retail, technology, energy, hospitality and philanthropy.">
+      <div class="map-node node-ratan">Ratan Tata</div>
+      <div class="map-connector">Chairman of Tata Sons, 1991–2012</div>
+      <div class="map-node node-group">Tata Sons / Tata Group</div>
+      <div class="map-branches">
+        <div class="map-branch"><strong>Industry &amp; mobility</strong><span>Tata Steel</span><span>Tata Motors</span><span>Jaguar Land Rover</span><span>Tata Nano</span></div>
+        <div class="map-branch"><strong>Retail &amp; consumer</strong><span>Trent</span><span>Titan</span><span>Tata Consumer Products</span></div>
+        <div class="map-branch"><strong>Technology</strong><span>TCS</span><span>Tata Elxsi</span><span>Tata Communications</span></div>
+        <div class="map-branch"><strong>Energy &amp; engineering</strong><span>Tata Power</span><span>Tata Projects</span><span>Voltas</span><span>Tata Chemicals</span></div>
+        <div class="map-branch"><strong>Other group businesses</strong><span>IHCL / Taj Hotels</span><span>Air India</span><span>Tata Capital</span><span>Tata Advanced Systems</span><span>Tata International</span></div>
+        <div class="map-branch"><strong>Philanthropy</strong><span>Tata Trusts</span></div>
+      </div>
+      <div class="map-caption">Simplified group connections, not a legal ownership chart. Air India returned to the Tata Group in 2022, after Ratan Tata’s chairmanship.</div>
+    </div>
+  </div>
 </section>
 <section class="view" id="impact" role="tabpanel" aria-labelledby="tab-impact" data-panel="impact">
   <div class="section-top"><div><div class="eyebrow">03 / Impact</div><h2>Beyond business</h2></div><p class="section-intro">His legacy is connected both to the Tata Group’s growth and to philanthropic work supporting communities.</p></div>
@@ -143,18 +217,37 @@ const milestones=[
 {year:"2024",title:"A lasting legacy",text:"Ratan Tata dies in October 2024, aged 86; his work remains part of the Tata Group’s history."}
 ];
 const ventures=[
-{name:"Tata Group",tag:"Leadership",summary:"A group of businesses across many industries.",details:"Ratan Tata became chairman of Tata Sons in 1991. During his chairmanship, the group went through restructuring and expanded internationally.",url:"https://www.tata.com/"},
-{name:"Tata Motors",tag:"Automotive",summary:"The company behind the Indica and Nano projects.",details:"Ratan Tata supported the development of the Nano, a small car launched in 2008 with the aim of making car ownership more accessible.",url:"https://www.tatamotors.com/"},
-{name:"Jaguar Land Rover",tag:"Global acquisition",summary:"A major international acquisition in 2008.",details:"Tata Motors acquired Jaguar Land Rover during Ratan Tata’s chairmanship, increasing the group’s presence in the global automotive industry.",url:"https://www.jaguarlandrover.com/"},
-{name:"Tata Consultancy Services",tag:"Technology",summary:"A global IT and consulting company in the group.",details:"TCS was established before Ratan Tata became chairman and grew substantially during his era as part of the wider Tata Group.",url:"https://www.tcs.com/"},
-{name:"Tata Trusts",tag:"Philanthropy",summary:"Trusts supporting social and community initiatives.",details:"Ratan Tata was closely associated with Tata Trusts, whose work includes health, education, livelihoods, and community development.",url:"https://www.tatatrusts.org/"},
-{name:"Tata Nano",tag:"Product project",summary:"A small car designed to make personal transport more affordable.",details:"Ratan Tata championed the Nano concept. The car was launched in 2008 and became one of the best-known projects linked to his leadership.",url:"https://www.tatamotors.com/"}
+{name:"Tata Group / Tata Sons",tag:"Leadership",summary:"The group holding company and its broad portfolio of businesses.",details:"Ratan Tata became chairman of Tata Sons in 1991. The companies listed here belong to or are associated with the wider Tata Group portfolio; this is not a legal ownership chart.",url:"https://www.tata.com/"},
+{name:"Tata Steel",tag:"Steel & materials",summary:"Steelmaking and materials business with a long history in India.",details:"Tata Steel is one of the Tata Group’s major industrial companies. Ratan Tata led the wider group as chairman; he did not found Tata Steel.",url:"https://www.tatasteel.com/"},
+{name:"Tata Motors",tag:"Automotive",summary:"Automotive company known for commercial vehicles and passenger cars.",details:"Ratan Tata supported product development and international expansion during his chairmanship, including the Nano project and the Jaguar Land Rover acquisition.",url:"https://www.tatamotors.com/"},
+{name:"Jaguar Land Rover",tag:"Automotive",summary:"International automotive business acquired by Tata Motors in 2008.",details:"Tata Motors acquired Jaguar Land Rover during Ratan Tata’s chairmanship, expanding the group’s international automotive presence.",url:"https://www.jaguarlandrover.com/"},
+{name:"Tata Nano",tag:"Product project",summary:"Small car project intended to make personal transport more affordable.",details:"Ratan Tata championed the Nano concept. The car launched in 2008 and remains a prominent project associated with his leadership.",url:"https://www.tatamotors.com/"},
+{name:"Trent",tag:"Retail",summary:"Retail company behind brands including Westside and Zudio.",details:"Trent is part of the wider Tata Group portfolio and operates in retail and lifestyle.",url:"https://trentlimited.com/"},
+{name:"Titan Company",tag:"Consumer & lifestyle",summary:"Watches, jewellery, eyewear and lifestyle products.",details:"Titan is a Tata Group company known for brands such as Titan, Tanishq and Fastrack.",url:"https://www.titancompany.in/"},
+{name:"Tata Consumer Products",tag:"Consumer & lifestyle",summary:"Food and beverage brands and products.",details:"The company brings together Tata-branded consumer products and other food and beverage businesses in its portfolio.",url:"https://www.tataconsumer.com/"},
+{name:"The Indian Hotels Company (IHCL)",tag:"Hospitality & aviation",summary:"Hospitality company known for the Taj hotel brand.",details:"IHCL is a Tata Group company in hospitality, part of the group’s broad presence beyond manufacturing and technology.",url:"https://www.ihcltata.com/"},
+{name:"Air India",tag:"Hospitality & aviation",summary:"Indian airline that returned to Tata Group ownership in 2022.",details:"Air India was founded by J. R. D. Tata as Tata Airlines. The Tata Group took the airline back into its portfolio in 2022, after Ratan Tata’s chairmanship.",url:"https://www.airindia.com/"},
+{name:"Tata Consultancy Services (TCS)",tag:"Technology",summary:"Global IT services, consulting and business solutions company.",details:"TCS was established before Ratan Tata became chairman and grew substantially during his era as part of the wider Tata Group.",url:"https://www.tcs.com/"},
+{name:"Tata Elxsi",tag:"Technology",summary:"Design and technology services company.",details:"Tata Elxsi works across design, engineering and technology services and is part of the Tata Group portfolio.",url:"https://www.tataelxsi.com/"},
+{name:"Tata Communications",tag:"Technology",summary:"Global digital infrastructure and communications services.",details:"Tata Communications is part of the group’s technology and connectivity portfolio.",url:"https://www.tatacommunications.com/"},
+{name:"Tata Power",tag:"Energy & infrastructure",summary:"Power generation, transmission, distribution and clean energy.",details:"Tata Power is a major Tata Group energy business, including renewable energy and electric-vehicle charging initiatives.",url:"https://www.tatapower.com/"},
+{name:"Tata Projects",tag:"Energy & infrastructure",summary:"Engineering, procurement and construction for major projects.",details:"Tata Projects works on infrastructure and industrial projects and is part of the wider Tata Group portfolio.",url:"https://www.tataprojects.com/"},
+{name:"Voltas",tag:"Energy & infrastructure",summary:"Cooling products, air conditioning and engineering solutions.",details:"Voltas is a Tata Group company known for air conditioning, cooling and engineering work.",url:"https://www.voltas.com/"},
+{name:"Tata Chemicals",tag:"Chemicals",summary:"Chemicals, materials and consumer-focused products.",details:"Tata Chemicals is one of the group’s established industrial businesses, with activities spanning basic chemistry and specialty products.",url:"https://www.tatachemicals.com/"},
+{name:"Tata Trusts",tag:"Philanthropy",summary:"Philanthropic trusts supporting health, education and communities.",details:"Ratan Tata was closely associated with Tata Trusts. Their work includes health, education, livelihoods and community development. The trusts are distinct from operating companies.",url:"https://www.tatatrusts.org/"},
+{name:"Tata Capital",tag:"Financial services",summary:"Financial services across lending, investment and related areas.",details:"Tata Capital is part of the wider Tata Group’s financial services portfolio.",url:"https://www.tatacapital.com/"},
+{name:"Tata Advanced Systems",tag:"Aerospace & engineering",summary:"Aerospace, defence and advanced engineering business.",details:"Tata Advanced Systems represents the group’s aerospace and defence manufacturing activities.",url:"https://www.tataadvancedsystems.com/"},
+{name:"Tata International",tag:"Leadership",summary:"Global trading and distribution business.",details:"Tata International operates in global trading, distribution and related business areas within the group portfolio.",url:"https://www.tatainternational.com/"}
 ];
 let cardIndex=0;
 function showCard(index){cardIndex=index;const item=milestones[index];document.getElementById("deck-year").textContent=item.year;document.getElementById("deck-title").textContent=item.title;document.getElementById("deck-text").textContent=item.text;document.getElementById("deck-count").textContent="CARD "+(index+1)+" OF "+milestones.length;document.getElementById("prev-card").disabled=index===0;document.getElementById("next-card").disabled=index===milestones.length-1;}
 document.getElementById("timeline").innerHTML=milestones.map(item=>'<article class="milestone"><div class="year">'+item.year+'</div><div><h3>'+item.title+'</h3><p>'+item.text+'</p></div></article>').join("");
-document.getElementById("venture-list").innerHTML=ventures.map((item,index)=>'<article class="venture"><div class="tag">'+item.tag+'</div><h3>'+item.name+'</h3><p>'+item.summary+'</p><button type="button" aria-expanded="false" aria-controls="venture-detail-'+index+'">Read more +</button><div class="details" id="venture-detail-'+index+'" hidden><p>'+item.details+'</p><p><a href="'+item.url+'" target="_blank" rel="noopener">Official website ↗</a></p></div></article>').join("");
+document.getElementById("venture-list").innerHTML=ventures.map((item,index)=>'<article class="venture" data-name="'+item.name.toLowerCase()+'" data-tag="'+item.tag+'"><div class="tag">'+item.tag+'</div><h3>'+item.name+'</h3><p>'+item.summary+'</p><button type="button" aria-expanded="false" aria-controls="venture-detail-'+index+'">Read more +</button><div class="details" id="venture-detail-'+index+'" hidden><p>'+item.details+'</p><p><a href="'+item.url+'" target="_blank" rel="noopener">Official website ↗</a></p></div></article>').join("");
 document.querySelectorAll(".venture button").forEach(button=>button.addEventListener("click",()=>{const details=document.getElementById(button.getAttribute("aria-controls"));const opening=details.hidden;details.hidden=!opening;button.setAttribute("aria-expanded",String(opening));button.textContent=opening?"Read less −":"Read more +";}));
+function filterVentures(){const query=document.getElementById("venture-search").value.trim().toLowerCase();const tag=document.getElementById("industry-filter").value;let shown=0;document.querySelectorAll(".venture").forEach(card=>{const matchesQuery=(card.textContent+" "+card.dataset.name+" "+card.dataset.tag).toLowerCase().includes(query);const matchesTag=tag==="all"||card.dataset.tag===tag;const visible=matchesQuery&&matchesTag;card.hidden=!visible;if(visible)shown++;});document.getElementById("filter-status").textContent="Showing "+shown+" of "+ventures.length+" companies and ventures.";}
+filterVentures();
+document.getElementById("venture-search").addEventListener("input",filterVentures);
+document.getElementById("industry-filter").addEventListener("change",filterVentures);
 document.getElementById("prev-card").addEventListener("click",()=>showCard(Math.max(0,cardIndex-1)));
 document.getElementById("next-card").addEventListener("click",()=>showCard(Math.min(milestones.length-1,cardIndex+1)));
 function openView(name, shouldScroll=true){
