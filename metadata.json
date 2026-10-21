@@ -1,0 +1,8 @@
+{
+  "name": "DigiGuard — Intelligent Android Permission Risk Detection",
+  "description": "Privacy-focused cybersecurity platform evaluating Android application permissions against declared purposes and configurable security policies.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
